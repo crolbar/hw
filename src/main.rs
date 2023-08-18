@@ -3,6 +3,7 @@ mod weather;
 mod coin;
 mod gen_passwd;
 mod tfi;
+mod cc;
 use clap::Parser;
 
 /// Hello, World!
@@ -46,6 +47,26 @@ enum Hw {
         /// Prints the number of occurrences of each word in the file
         #[clap(long, short)]
         word_occur: bool,
+    },
+
+    /// Convert one currency to another
+    #[clap(name = "currencyConvert", alias = "cc")]
+    Cc {
+        /// list all avalable currencies
+        #[clap(long, short)]
+        list: bool,
+
+        /// amount
+        #[clap()]
+        amount: Option<f64>,
+
+        /// currency from
+        #[clap()]
+        base: Option<String>,
+
+        /// currency to
+        #[clap()]
+        to: Option<String>,
     }
 }
 
@@ -60,5 +81,8 @@ fn main() {
         Hw::Flip => coin::main(),
         Hw::GenPasswd { symbol } => gen_passwd::main(symbol),
         Hw::TxtFileInfo {file_path, print_file, word_occur } => tfi::main(file_path, print_file, word_occur),
+        Hw::Cc { list: false, amount: Some(amount), base: Some(base), to: Some(to)} => cc::main(amount, base.as_str(), to.as_str()),
+        Hw::Cc { list: true, amount: _, to: _, base: _ } => cc::list_currencies(),
+        _ => println!("false"),
     }
 }

@@ -1,5 +1,5 @@
 # hw
-Just a simple multi-functional app I started to learn rust.
+Just a combination of small simple apps I started to learn rust.
 
 ### Features
 - [x] CLI calculator

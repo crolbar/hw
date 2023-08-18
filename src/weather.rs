@@ -5,7 +5,7 @@ use serde_json::Value;
 
 
 async fn fetch_weather_data(location: &str) -> Result<String, reqwest::Error> {
-    let api_key = "aba36eff207740e0a5e234935232607";
+    let api_key = "";
     let url = format!("http://api.weatherapi.com/v1/current.json?key={}&q={}", api_key, location);
 
     let response_text = reqwest::get(url).await?.text().await?;
@@ -50,7 +50,7 @@ async fn print_weather(location: &str) {
 
 
 pub fn get_weather() {
-    let location = "Silistra";
+    let location = "";
     print_weather(location);
 }
 

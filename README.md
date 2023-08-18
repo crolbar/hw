@@ -5,7 +5,7 @@ Just a simple multi-functional app I started to learn rust.
 - [x] CLI calculator
 - [x] Weather API calls (from weatherapi.com) 
 - [x] Passwd generator 
+- [x] Word counter
 ---
 - [ ] Currency converter
-- [ ] Word counter
-- [ ] Todo list/ remainder app
+- [ ] Todo list/remainder app

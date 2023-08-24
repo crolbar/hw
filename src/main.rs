@@ -4,6 +4,7 @@ mod coin;
 mod gen_passwd;
 mod tfi;
 mod cc;
+mod notes;
 use clap::Parser;
 
 /// Hello, World!
@@ -49,7 +50,7 @@ enum Hw {
         word_occur: bool,
     },
 
-    /// Convert one currency to another
+    /// Convert one currency to another (e.g: `hw cc 15 USD EUR`)
     #[clap(name = "currencyConvert", alias = "cc")]
     Cc {
         /// list all avalable currencies
@@ -67,7 +68,27 @@ enum Hw {
         /// currency to
         #[clap()]
         to: Option<String>,
-    }
+    },
+
+    /// Notes
+    #[clap(name = "Notes", alias = "n")]
+    Notes {
+        /// name of the note
+        #[arg(default_value = "-")]
+        name: Option<String>,
+
+        /// list all the notes
+        #[arg(short, long)]
+        list_notes: bool,
+
+        /// print the contents of a note
+        #[arg(short, long)]
+        cat_note: bool,
+        
+        /// remove a note
+        #[arg(short, long)]
+        del_note: bool,
+    },
 }
 
 
@@ -76,13 +97,21 @@ fn main() {
 
     match args {
         Hw::Calculator => calc::main(),
+        Hw::Flip => coin::main(),
+
+        Hw::GenPasswd { symbol } => gen_passwd::main(symbol),
+
         Hw::Weather { city: None } => weather::get_weather(),
         Hw::Weather { city: Some(city) } => weather::get_weather_city(&city),
-        Hw::Flip => coin::main(),
-        Hw::GenPasswd { symbol } => gen_passwd::main(symbol),
+
         Hw::TxtFileInfo {file_path, print_file, word_occur } => tfi::main(file_path, print_file, word_occur),
+
         Hw::Cc { list: false, amount: Some(amount), base: Some(base), to: Some(to)} => cc::main(amount, base.as_str(), to.as_str()),
         Hw::Cc { list: true, amount: _, to: _, base: _ } => cc::list_currencies(),
-        _ => println!("false"),
+
+        Hw::Notes { name: Some(name), list_notes: false, cat_note: false, del_note: false} => notes::create_note(name),
+        Hw::Notes { name: Some(name), list_notes, cat_note, del_note } => notes::lcr_note(name, list_notes, cat_note, del_note),
+
+        _ => println!("Invalid command or argument use -h or --help for help."),
     }
 }

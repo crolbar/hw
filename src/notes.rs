@@ -6,7 +6,7 @@ pub fn create_note(note_name: String) {
     if let Some(home_path) = home_dir() {
         let mut note_contents = String::new();
         let folder_path = home_path.join("hw/notes");
-
+        
         let note_path = folder_path.join(note_name);
 
         if !folder_path.exists() {

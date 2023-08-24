@@ -3,6 +3,4 @@
 - [x] Passwd generator 
 - [x] Word counter 
 - [x] Currency converter
----
-- [ ] Todo list/remainder app
-- [ ] Scraper ?
+- [x] Note taking app

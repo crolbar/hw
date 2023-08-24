@@ -2,7 +2,7 @@
 - [x] Weather API calls (from weatherapi.com) 
 - [x] Passwd generator 
 - [x] Word counter 
+- [x] Currency converter
 ---
-- [ ] Currency converter ?
 - [ ] Todo list/remainder app
 - [ ] Scraper ?
